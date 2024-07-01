@@ -10,7 +10,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["GitHubActionsSampleApp.csproj", "GitHubActionsSampleApp/"]
-RUN dotnet restore "./GitHubActionsSampleApp.csproj"
+RUN dotnet restore "./GitHubActionsSampleApp/GitHubActionsSampleApp.csproj"
 COPY . .
 WORKDIR "/src/GitHubActionsSampleApp"
 RUN dotnet build "./GitHubActionsSampleApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
