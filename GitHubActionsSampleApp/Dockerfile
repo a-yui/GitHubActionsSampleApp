@@ -11,7 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["GitHubActionsSampleApp.csproj", "GitHubActionsSampleApp/"]
 RUN dotnet restore "./GitHubActionsSampleApp/GitHubActionsSampleApp.csproj"
-COPY . .
+COPY ["." , "GitHubActionsSampleApp/"]
 WORKDIR "/src/GitHubActionsSampleApp"
 RUN dotnet build "./GitHubActionsSampleApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
