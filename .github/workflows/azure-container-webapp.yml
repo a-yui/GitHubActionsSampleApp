@@ -30,7 +30,8 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -f ./Dockerfile -t yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+        cd GitHubActionsSampleApp
+        docker build . -t yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
         docker push yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}     
       
     - uses: azure/webapps-deploy@v2
