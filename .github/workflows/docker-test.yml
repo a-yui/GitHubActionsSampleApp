@@ -1,0 +1,31 @@
+name: Docker Test
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'GitHubActionsSampleApp/Dockerfile'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'GitHubActionsSampleApp/Dockerfile'
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+      - name: 'Checkout GitHub Action' 
+        uses: actions/checkout@main
+
+      - name: Build and push container image to registry
+        run: |
+          cd GitHubActionsSampleApp
+          docker build . -t yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+
+      - name: run-dockle
+        uses: erzz/dockle-action@v1.4.0
+        with:
+          image: yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+          exit-code: 1
+          failure-threshold: fatal
