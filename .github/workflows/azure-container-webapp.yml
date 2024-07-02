@@ -1,10 +1,19 @@
 name: Build and deploy a container to an Azure Web App
 
 on:
+  # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows
   push:
     branches: [ "master" ]
     paths:
-    - 'GitHubActionsSampleApp/**'
+      - 'GitHubActionsSampleApp/**'
+    #tags:
+    #  - v1.**
+  pull_request:
+    types:
+      - opened
+    branches: [ "master" ]
+    paths:
+      - 'GitHubActionsSampleApp/**'
   workflow_dispatch:
 
 permissions:
