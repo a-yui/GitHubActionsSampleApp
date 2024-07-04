@@ -82,7 +82,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           
       - name: Swap slots
-        run: az webapp deployment slot swap -s Production -n yuicloudactionsapp -g rg-container
+        run: az webapp deployment slot swap -s staging -n yuicloudactionsapp -g rg-container
 
       - name: Azure logout
         run: |
