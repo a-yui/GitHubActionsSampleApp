@@ -49,10 +49,10 @@ jobs:
     environment: development
     steps:
       - uses: azure/webapps-deploy@v2
-          with:
-            app-name: 'yuicloudactionsapp'
-            slot-name: staging
-            images: 'yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}'
+        with:
+          app-name: 'yuicloudactionsapp'
+          slot-name: staging
+          images: 'yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}'
 
   prd:
     runs-on: ubuntu-latest
