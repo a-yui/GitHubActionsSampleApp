@@ -2,10 +2,10 @@ name: Build and deploy a container to an Azure Web App
 
 on:
   # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows
-  #push:
-  #  branches: [ "master" ]
-  #  paths:
-  #    - 'GitHubActionsSampleApp/**'
+  push:
+    branches: [ "develop" ]
+    paths:
+      - 'GitHubActionsSampleApp/**'
   #  #tags:
   #  #  - v1.**
   #pull_request:
@@ -57,6 +57,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'yuicloudactionsapp'
+          slot-name: staging
           images: 'yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}'
     
       - name: Azure logout
