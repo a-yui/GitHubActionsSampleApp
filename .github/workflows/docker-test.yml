@@ -21,11 +21,11 @@ jobs:
       - name: Build and push container image to registry
         run: |
           cd GitHubActionsSampleApp
-          docker build . -t yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+          docker build . -t ${{ vars.ACR_NAME }}.azurecr.io/githubactionsampleapp:${{ github.sha }}
 
       - name: run-dockle
         uses: erzz/dockle-action@v1.4.0
         with:
-          image: yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+          image: ${{ vars.ACR_NAME }}.azurecr.io/githubactionsampleapp:${{ github.sha }}
           exit-code: 1
           failure-threshold: fatal
