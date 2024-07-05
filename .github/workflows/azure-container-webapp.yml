@@ -36,13 +36,13 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         
       - name: Log in to container registry
-        run: az acr login -n yuicloudcregist
+        run: az acr login -n ${{ vars.ACR_NAME }}
 
       - name: Build and push container image to registry
         run: |
           cd GitHubActionsSampleApp
-          docker build . -t yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
-          docker push yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}
+          docker build . -t ${{ vars.ACR_NAME }}.azurecr.io/githubactionsampleapp:${{ github.sha }}
+          docker push ${{ vars.ACR_NAME }}.azurecr.io/githubactionsampleapp:${{ github.sha }}
     
     #- uses: azure/docker-login@v1
     #  with:
@@ -56,9 +56,9 @@ jobs:
     
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: 'yuicloudactionsapp'
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           slot-name: staging
-          images: 'yuicloudcregist.azurecr.io/githubactionsampleapp:${{ github.sha }}'
+          images: '${{ vars.ACR_NAME }}.azurecr.io/githubactionsampleapp:${{ github.sha }}'
     
       - name: Azure logout
         run: |
