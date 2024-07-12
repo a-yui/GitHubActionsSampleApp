@@ -1,1 +1,2 @@
 # GitHubActionsSampleApp
+GitHub Actionsを色々試すリポジトリ
